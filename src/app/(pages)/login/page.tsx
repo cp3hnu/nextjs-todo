@@ -1,18 +1,23 @@
-
 'use client';
+
 import "@app/globals.css";
 import { useRouter } from 'next/navigation'
-import { useActionState, useEffect } from "react";
-import { login } from "../action";
+import { useActionState, useEffect, useState } from "react";
+import { login } from "@app/action";
 
 export default function LoginPage() {
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(login, undefined);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   useEffect(() => {
+    setTimeout(() => {
       if (state?.success) {
         router.push(`/tasks`);
       }
-    }, [state, router]);
+    }, 1000);
+  }, [state, router]);
 
   return (
     <div className="bg-gray-100 flex items-center justify-center min-h-screen">
@@ -20,11 +25,11 @@ export default function LoginPage() {
         <form className="space-y-6" action={formAction}>
           <div>
             <label htmlFor="username" className="block text-sm font-medium text-gray-700">用户名</label>
-            <input type="text" id="username" name="username" required className="input-base" />
+            <input type="text" id="username" name="username" required className="input-base" value={username} onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">密码</label>
-            <input type="password" id="password" name="password" required className="input-base" />
+            <input type="password" id="password" name="password" required className="input-base" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div className="flex items-center justify-between space-x-4">
             <button type="submit" className="primary-button" disabled={isPending}>

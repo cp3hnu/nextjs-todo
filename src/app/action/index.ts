@@ -1,17 +1,18 @@
 "use server";
 import { DBUser, DBTask } from "@app/types";
-
 import {
   dbInsertUser,
   dbGetUserByUsername,
   dbInsertTask,
   dbGetTasks,
   dbUpdateTask,
-  dbDeleteTask
+  dbDeleteTask,
+  dbGetUserByEmail
 } from "../db";
 import { createSession, deleteSession } from "@app/utils/session";
 import { verifySession } from "@app/utils/dal";
 import { redirect } from "next/navigation";
+import bcrypt from "bcryptjs";
 
 export type RegisterFormState = {
   success: boolean;
@@ -28,7 +29,7 @@ export async function register(
   const password = formData.get("password") as string;
   if (!username || !email || !password) {
     return {
-      success: true,
+      success: false,
       user: null,
       message: "所有字段都是必填的"
     };
@@ -40,9 +41,31 @@ export async function register(
       message: "密码长度不能少于6位"
     };
   }
+  const existingUsername = (await dbGetUserByUsername(
+    username
+  )) as DBUser | null;
+  if (existingUsername) {
+    return {
+      success: false,
+      user: null,
+      message: "用户名已存在"
+    };
+  }
+  const existingEmail = (await dbGetUserByEmail(email)) as DBUser | null;
+  if (existingEmail) {
+    return {
+      success: false,
+      user: null,
+      message: "邮箱已被注册"
+    };
+  }
   try {
-    const user = (await dbInsertUser(username, email, password)) as DBUser;
-    // 注册成功，返回特殊状态，页面端根据该状态跳转
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    const user = (await dbInsertUser(
+      username,
+      email,
+      hashedPassword
+    )) as DBUser;
     return {
       success: true,
       message: "注册成功，即将跳转到登录页",
@@ -51,7 +74,7 @@ export async function register(
   } catch (error) {
     console.error("Error registering user:", error);
     return {
-      success: true,
+      success: false,
       user: null,
       message: "注册失败"
     };
@@ -79,7 +102,7 @@ export async function login(
       message: "用户不存在"
     };
   }
-  if (user.password !== password) {
+  if (!bcrypt.compareSync(password, user.password)) {
     return {
       success: false,
       user: null,

@@ -9,11 +9,11 @@ import { DBTask, DBUser } from "@app/types";
 // });
 
 const sql = postgres({
-  host: process.env.DB_HOST || "localhost",
-  port: Number(process.env.DB_PORT) || 5432,
-  database: process.env.DB_NAME || "mydb",
-  username: process.env.DB_USER || "cp3hnu",
-  password: process.env.DB_PASSWORD || "zwpsq"
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  database: process.env.DB_NAME,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD
 });
 
 export default sql;
@@ -31,7 +31,7 @@ export async function createUserTable() {
     )
   `;
 }
-// create todo table
+// create task table
 export async function createTaskTable() {
   await sql`
     CREATE TABLE IF NOT EXISTS tasks (
@@ -82,6 +82,18 @@ export async function dbGetUserByUsername(username: string): Promise<DBUser> {
     return result[0] as DBUser;
   } catch (error) {
     console.error("Error fetching user by username:", error);
+    throw error;
+  }
+}
+
+export async function dbGetUserByEmail(email: string): Promise<DBUser> {
+  try {
+    const result = await sql`
+      SELECT * FROM users WHERE email = ${email}
+    `;
+    return result[0] as DBUser;
+  } catch (error) {
+    console.error("Error fetching user by username or email:", error);
     throw error;
   }
 }

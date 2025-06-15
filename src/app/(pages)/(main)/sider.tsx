@@ -1,5 +1,6 @@
 'use client';
 import { usePathname } from 'next/navigation';
+import { logout } from '@/app/action';
 
 export default function Sider() {
   const pathname = usePathname();
@@ -26,7 +27,7 @@ export default function Sider() {
           </a>
         ))}
       </nav>
-      <button className="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600 transition-colors">Logout</button>
+      <button className="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600 transition-colors" onClick={() => logout()}>Logout</button>
     </div>
   );
 }
