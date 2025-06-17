@@ -5,7 +5,6 @@ import { verifySession } from "@/app/utils/dal";
 export async function GET(request: NextRequest) {
   const session = await verifySession();
   const userId = session?.userId;
-  console.log("User ID from session:", userId, typeof userId);
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

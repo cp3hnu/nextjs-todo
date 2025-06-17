@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 const secretKey = process.env.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
-const Expires = 1 * 60 * 60 * 1000; // 7 days in milliseconds
+const Expires = 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
 export async function encrypt(payload: JWTPayload) {
   return new SignJWT(payload)

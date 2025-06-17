@@ -16,6 +16,7 @@ export default function TaskList({ initialTasks: tasks = [] }: TaskListProps) {
   const searchParams = useSearchParams();
   const title = searchParams.get("title") || "";
 
+  // 处理新增
   const handleAdd = async (formData: FormData) => {
     const title = formData.get("title")?.toString().trim();
     if (title) {
@@ -24,19 +25,19 @@ export default function TaskList({ initialTasks: tasks = [] }: TaskListProps) {
     }
   }
 
-  // 处理完成状态切换
-  const handleToggle = async (task: DBTask) => {
-    await updateTask(task.id, { completed: !task.completed });
-    router.refresh(); // 刷新页面以获取最新任务列表
-  };
-
   // 处理删除
   const handleDelete = async (taskId: number) => {
     await deleteTask(taskId);
     router.refresh(); // 刷新页面以获取最新任务列表
   };
 
-  // 处理编辑保存
+  // 处理完成状态切换
+  const handleToggle = async (task: DBTask) => {
+    await updateTask(task.id, { completed: !task.completed });
+    router.refresh(); // 刷新页面以获取最新任务列表
+  };
+
+  // 处理标题修改
   const handleEditSave = async (task: DBTask) => {
     if (editTitle.trim() && editTitle !== task.title) {
       await updateTask(task.id, { title: editTitle });

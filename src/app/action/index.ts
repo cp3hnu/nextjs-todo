@@ -1,4 +1,5 @@
 "use server";
+
 import { DBUser, DBTask } from "@app/types";
 import {
   dbInsertUser,
@@ -20,6 +21,7 @@ export type RegisterFormState = {
   user?: DBUser | null;
 };
 
+// 注册
 export async function register(
   _prevState: RegisterFormState | undefined,
   formData: FormData
@@ -81,6 +83,7 @@ export async function register(
   }
 }
 
+// 登录
 export async function login(
   _prevState: RegisterFormState | undefined,
   formData: FormData
@@ -120,11 +123,13 @@ export async function login(
   };
 }
 
+// 退出登录
 export async function logout() {
   await deleteSession();
   redirect("/login");
 }
 
+// 获取任务列表
 export async function getTasks(title: string | undefined): Promise<DBTask[]> {
   const { userId } = (await verifySession()) || {};
   if (!userId) {
@@ -139,6 +144,7 @@ export async function getTasks(title: string | undefined): Promise<DBTask[]> {
   }
 }
 
+// 添加任务
 export async function addTask(title?: string): Promise<DBTask | null> {
   const { userId } = (await verifySession()) || {};
   if (!userId) {
@@ -157,6 +163,7 @@ export async function addTask(title?: string): Promise<DBTask | null> {
   }
 }
 
+// 更新任务，包括完成状态和标题
 export async function updateTask(
   taskId: number,
   content: { completed?: boolean; title?: string }
@@ -177,6 +184,7 @@ export async function updateTask(
   }
 }
 
+// 删除任务
 export async function deleteTask(taskId: number): Promise<number> {
   const { userId } = (await verifySession()) || {};
   if (!userId) {

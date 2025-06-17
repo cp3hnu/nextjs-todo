@@ -1,12 +1,5 @@
 import postgres from "postgres";
 import { DBTask, DBUser } from "@app/types";
-// const sql = postgres({
-//   host: "localhost",
-//   port: 5432,
-//   database: "mydb",
-//   username: "cp3hnu",
-//   password: "zwpsq"
-// });
 
 const sql = postgres({
   host: process.env.DB_HOST,
@@ -31,6 +24,7 @@ export async function createUserTable() {
     )
   `;
 }
+
 // create task table
 export async function createTaskTable() {
   await sql`
@@ -121,8 +115,11 @@ export async function dbGetTasks(
 ): Promise<DBTask[]> {
   try {
     const titleQuery = title ? sql`AND title ILIKE ${`%${title}%`}` : sql``;
+    const orderBy = sql`ORDER BY completed DESC, 
+      CASE WHEN completed THEN updated_at END DESC, 
+      CASE WHEN NOT completed THEN created_at END ASC;`;
     const result = await sql`
-      SELECT * FROM tasks WHERE user_id = ${userId} ${titleQuery}
+      SELECT * FROM tasks WHERE user_id = ${userId} ${titleQuery} ${orderBy}
     `;
     console.log("Fetched tasks:", title, result);
 
@@ -137,10 +134,14 @@ export async function dbUpdateTask(
   taskId: number,
   updates: { title?: string; completed?: boolean }
 ): Promise<DBTask> {
+  const dbUpdates = {
+    ...updates,
+    updated_at: new Date().toISOString() // Ensure updated_at is always set
+  };
   try {
     const result = await sql`
       UPDATE tasks
-      SET ${sql(updates)}
+      SET ${sql(dbUpdates)}
       WHERE id = ${taskId}
       RETURNING *
     `;
