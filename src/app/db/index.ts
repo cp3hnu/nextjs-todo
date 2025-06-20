@@ -1,13 +1,9 @@
 import postgres from "postgres";
 import { DBTask, DBUser } from "@app/types";
 
-const sql = postgres({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  database: process.env.DB_NAME,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD
-});
+const sql = postgres(process.env.DATABASE_URL!, { ssl: "verify-full" });
+
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 export default sql;
 
