@@ -37,9 +37,9 @@ export default function RegisterPage() {
             <button type="submit" className="primary-button" disabled={isPending}>
               注册
             </button>
-            <button type="button" className="secondary-button" onClick={() => {
+            <button type="button" className="secondary-button" disabled={isPending} onClick={() => {
               router.push('/login');
-            }} disabled={isPending}>
+            }}>
               取消
             </button>
           </div>
