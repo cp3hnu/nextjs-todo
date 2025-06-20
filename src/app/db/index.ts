@@ -3,6 +3,8 @@ import { DBTask, DBUser } from "@app/types";
 
 const sql = postgres(process.env.DATABASE_URL!, { ssl: "verify-full" });
 
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
 export default sql;
 
 // create user table
