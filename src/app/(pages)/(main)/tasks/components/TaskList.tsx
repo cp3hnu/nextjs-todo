@@ -56,7 +56,7 @@ export default function TaskList({ initialTasks: tasks = [] }: TaskListProps) {
             id="search"
             name="title"
             type="search"
-            placeholder="Search"
+            placeholder="搜索"
             defaultValue={title}
             className="input-base rounded-lg flex-1"
           />
