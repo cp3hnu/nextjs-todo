@@ -12,11 +12,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    setTimeout(() => {
-      if (state?.success) {
-        router.push(`/tasks`);
-      }
-    }, 1000);
+    if (state?.success) {
+      router.push(`/tasks`);
+    }
   }, [state, router]);
 
   return (
