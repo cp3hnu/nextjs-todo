@@ -51,7 +51,7 @@ export default function TaskList({ initialTasks: tasks = [] }: TaskListProps) {
     <div className="flex h-full w-full flex-col items-center justify-center">
       <div className="bg-white p-8 my-12 rounded-lg shadow-md h-full w-4/5 space-y-4 flex flex-col">
         <form className="space-x-4" action="/tasks" method="get">
-          <label htmlFor="search" className="sr-only">Search</label>
+          <label htmlFor="search" className="sr-only">搜索</label>
           <input
             id="search"
             name="title"
@@ -123,7 +123,7 @@ export default function TaskList({ initialTasks: tasks = [] }: TaskListProps) {
             id="add"
             name="title"
             type="text"
-            placeholder="Add a new task"
+            placeholder="添加新任务"
             className="input-base rounded-lg"
           />
         </form>
