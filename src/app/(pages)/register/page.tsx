@@ -23,15 +23,15 @@ export default function RegisterPage() {
         <form className="space-y-6" action={formAction}>
           <div>
             <label htmlFor="username" className="block text-sm font-medium text-gray-700">用户名</label>
-            <input type="text" id="username" name="username" required className="input-base" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input type="text" id="username" name="username" required className="input-base" placeholder="请输入用户名" value={username} onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">邮箱</label>
-            <input type="email" id="email" name="email" required className="input-base" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" id="email" name="email" required className="input-base" placeholder="请输入邮箱" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">密码</label>
-            <input type="password" id="password" name="password" required className="input-base" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" id="password" name="password" required className="input-base" placeholder="请输入密码" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div className="flex items-center justify-between space-x-4">
             <button type="submit" className="primary-button" disabled={isPending}>
