@@ -1,5 +1,5 @@
 import TaskList from "./components/TaskList";
-import { getTasks } from "@/app/action";
+import { getTasks, getUser } from "@/app/action";
 import { PageProps } from "@/app/types";
 
 export default async function TasksPage({ searchParams }: PageProps) {
@@ -8,6 +8,7 @@ export default async function TasksPage({ searchParams }: PageProps) {
   const tasks = await getTasks(title as string | undefined).catch(() => {
     return [];
   });
+  const user = await getUser().catch(() => undefined);
 
-  return (<TaskList initialTasks={tasks}></TaskList>)
+  return (<TaskList initialTasks={tasks} currentUser={user}></TaskList>)
 }

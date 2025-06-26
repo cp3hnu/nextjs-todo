@@ -1,15 +1,16 @@
 "use client";
 import { addTask, updateTask, deleteTask } from "@/app/action";
 import { useState } from "react";
-import { DBTask } from "@/app/types";
+import { DBTask, DBUser } from "@/app/types";
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from "next/navigation";
 
 interface TaskListProps {
   initialTasks?: DBTask[];
+  currentUser?: DBUser;
 }
 
-export default function TaskList({ initialTasks: tasks = [] }: TaskListProps) {
+export default function TaskList({ initialTasks: tasks = [], currentUser }: TaskListProps) {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editTitle, setEditTitle] = useState<string>("");
   const router = useRouter()
@@ -48,8 +49,9 @@ export default function TaskList({ initialTasks: tasks = [] }: TaskListProps) {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
-      <div className="bg-white p-8 my-12 rounded-lg shadow-md h-full w-4/5 space-y-4 flex flex-col">
+    <div className="flex h-full w-full flex-col items-center justify-center pt-4">
+      <h1 className="text-2xl font-bold w-4/5">Hello, {currentUser?.username}</h1>
+      <div className="bg-white p-8 my-4 rounded-lg shadow-md flex-1 w-4/5 flex flex-col">
         <form className="space-x-4" action="/tasks" method="get">
           <label htmlFor="search" className="sr-only">搜索</label>
           <input
@@ -69,7 +71,7 @@ export default function TaskList({ initialTasks: tasks = [] }: TaskListProps) {
             >
               <input
                 type="checkbox"
-                checked={task.completed}
+                checked={task.completed ?? false}
                 onChange={() => handleToggle(task)}
                 className="form-checkbox h-5 w-5"
               />
