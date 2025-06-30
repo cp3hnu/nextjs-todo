@@ -10,11 +10,7 @@ const db = drizzle({
 
 export default db;
 
-export async function dbInsertUser(
-  username: string,
-  email: string,
-  password: string,
-): Promise<DBUser> {
+export async function dbInsertUser(username: string, email: string, password: string): Promise<DBUser> {
   try {
     const user: typeof usersTable.$inferInsert = {
       username,
@@ -31,10 +27,7 @@ export async function dbInsertUser(
 
 export async function dbGetUserById(id: number): Promise<DBUser> {
   try {
-    const users = await db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.id, id));
+    const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
     return users[0];
   } catch (error) {
     console.error("Error fetching user by ID:", error);
@@ -44,10 +37,7 @@ export async function dbGetUserById(id: number): Promise<DBUser> {
 
 export async function dbGetUserByUsername(username: string): Promise<DBUser> {
   try {
-    const users = await db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.username, username));
+    const users = await db.select().from(usersTable).where(eq(usersTable.username, username));
     return users[0];
   } catch (error) {
     console.error("Error fetching user by username:", error);
@@ -57,10 +47,7 @@ export async function dbGetUserByUsername(username: string): Promise<DBUser> {
 
 export async function dbGetUserByEmail(email: string): Promise<DBUser> {
   try {
-    const users = await db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.email, email));
+    const users = await db.select().from(usersTable).where(eq(usersTable.email, email));
     return users[0];
   } catch (error) {
     console.error("Error fetching user by username or email:", error);
@@ -68,10 +55,7 @@ export async function dbGetUserByEmail(email: string): Promise<DBUser> {
   }
 }
 
-export async function dbInsertTask(
-  userId: number,
-  title: string,
-): Promise<DBTask> {
+export async function dbInsertTask(userId: number, title: string): Promise<DBTask> {
   try {
     const task: typeof tasksTable.$inferInsert = {
       userId,
@@ -85,10 +69,7 @@ export async function dbInsertTask(
   }
 }
 
-export async function dbGetTasks(
-  userId: number,
-  title?: string,
-): Promise<DBTask[]> {
+export async function dbGetTasks(userId: number, title?: string): Promise<DBTask[]> {
   try {
     const filters = [eq(tasksTable.userId, userId)];
     if (title) {
@@ -116,20 +97,13 @@ export async function dbGetTasks(
   }
 }
 
-export async function dbUpdateTask(
-  taskId: number,
-  updates: { title?: string; completed?: boolean },
-): Promise<DBTask> {
+export async function dbUpdateTask(taskId: number, updates: { title?: string; completed?: boolean }): Promise<DBTask> {
   const dbUpdates = {
     ...updates,
     updatedAt: new Date(),
   };
   try {
-    const result = await db
-      .update(tasksTable)
-      .set(dbUpdates)
-      .where(eq(tasksTable.id, taskId))
-      .returning();
+    const result = await db.update(tasksTable).set(dbUpdates).where(eq(tasksTable.id, taskId)).returning();
     return result[0];
   } catch (error) {
     console.error("Error updating task:", error);
