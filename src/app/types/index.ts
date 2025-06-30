@@ -1,21 +1,8 @@
-export interface DBUser {
-  id: number;
-  username: string;
-  email: string;
-  password: string;
-  created_at: Date;
-  updated_at: Date;
-}
+import { usersTable, tasksTable } from "@app/db/schema";
 
-export interface DBTask {
-  id: number;
-  user_id: number;
-  title: string;
-  description: string;
-  completed: boolean;
-  created_at: Date;
-  updated_at: Date;
-}
+export type DBUser = typeof usersTable.$inferSelect;
+
+export type DBTask = typeof tasksTable.$inferSelect;
 
 export interface PageProps {
   params: Promise<{ slug: string }>;
