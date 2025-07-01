@@ -10,5 +10,5 @@ export default async function TasksPage({ searchParams }: PageProps) {
   });
   const user = await getUser().catch(() => undefined);
 
-  return (<TaskList initialTasks={tasks} currentUser={user}></TaskList>)
+  return <TaskList initialTasks={tasks} currentUser={user}></TaskList>;
 }
