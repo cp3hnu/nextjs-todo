@@ -50,7 +50,7 @@ export default function TaskList({ initialTasks: tasks = [], currentUser }: Task
 
   return (
     <div className="flex h-full w-full flex-col items-center pt-4">
-      <h1 className="w-4/5 text-2xl font-bold flex-none">Hello, {currentUser?.username}</h1>
+      <h1 className="w-4/5 flex-none text-2xl font-bold">Hello, {currentUser?.username}</h1>
       <div className="my-4 flex w-4/5 flex-1 flex-col rounded-lg bg-white p-8 shadow-md">
         <form action="/tasks" method="get">
           <label htmlFor="search" className="sr-only">
@@ -65,7 +65,7 @@ export default function TaskList({ initialTasks: tasks = [], currentUser }: Task
             className="input-base flex-1 rounded-lg"
           />
         </form>
-        <div className="flex-1 overflow-y-auto mt-4 p-4 basis-0 min-h-20">
+        <div className="mt-4 min-h-20 flex-1 basis-0 overflow-y-auto p-4">
           {tasks.map(task => (
             <div key={task.id} className="flex items-center space-x-2 py-2">
               <input
