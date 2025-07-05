@@ -1,6 +1,7 @@
 "use server";
 import "server-only";
-import { SignJWT, jwtVerify, type JWTPayload } from "jose";
+
+import { type JWTPayload, jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
 
 const secretKey = process.env.SESSION_SECRET;

@@ -1,7 +1,8 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import { eq, ilike, and, desc, sql } from "drizzle-orm";
-import { usersTable, tasksTable } from "./schema";
 import { DBTask, DBUser } from "@app/types";
+import { and, desc, eq, ilike, sql } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/node-postgres";
+
+import { tasksTable, usersTable } from "./schema";
 
 const db = drizzle({
   connection: process.env.DATABASE_URL,

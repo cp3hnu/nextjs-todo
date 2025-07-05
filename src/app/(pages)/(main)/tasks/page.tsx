@@ -1,6 +1,7 @@
-import TaskList from "./components/TaskList";
 import { getTasks, getUser } from "@/app/action";
 import { PageProps } from "@/app/types";
+
+import TaskList from "./components/TaskList";
 
 export default async function TasksPage({ searchParams }: PageProps) {
   const _searchParams = await searchParams;

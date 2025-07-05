@@ -1,8 +1,9 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-import prettierPlugin from "eslint-plugin-prettier";
-import prettierConfig from "eslint-config-prettier";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,20 +14,16 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
-  // 添加 prettier-config（关闭与 Prettier 冲突的规则）
+  eslintConfigPrettier,
+  eslintPluginPrettierRecommended,
   {
-    name: "prettier-config",
-    rules: prettierConfig.rules,
-  },
-
-  // 可选：将 Prettier 错误显示为 ESLint 错误（配合 eslint --fix 使用）
-  {
-    name: "plugin:prettier/recommended",
+    name: "import-sort",
     plugins: {
-      prettier: prettierPlugin,
+      "simple-import-sort": simpleImportSort,
     },
     rules: {
-      "prettier/prettier": "error",
+      "simple-import-sort/imports": "error", // 对 import 进行排序
+      "simple-import-sort/exports": "error", // 对 export 进行排序（可选）
     },
   },
 ];

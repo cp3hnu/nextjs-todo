@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
 import { dbGetTasks } from "@app/db";
+import { NextRequest, NextResponse } from "next/server";
+
 import { verifySession } from "@/app/utils/dal";
 
 export async function GET(request: NextRequest) {

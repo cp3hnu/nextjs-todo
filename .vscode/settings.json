@@ -1,13 +1,19 @@
 {
-  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
   "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[javascriptreact]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
   "editor.formatOnSave": true,
-  "eslint.validate": ["javascript", "typescript", "typescriptreact"],
+  "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact"],
   "files.associations": {
     "*.css": "tailwindcss"
   }

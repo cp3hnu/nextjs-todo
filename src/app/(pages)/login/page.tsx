@@ -1,9 +1,10 @@
 "use client";
 
 import "@app/globals.css";
+
+import { login } from "@app/action";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
-import { login } from "@app/action";
 
 export default function LoginPage() {
   const router = useRouter();

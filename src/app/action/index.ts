@@ -1,20 +1,21 @@
 "use server";
 
-import { DBUser, DBTask } from "@app/types";
+import { DBTask, DBUser } from "@app/types";
+import { verifySession } from "@app/utils/dal";
+import { createSession, deleteSession } from "@app/utils/session";
+import bcrypt from "bcryptjs";
+import { redirect } from "next/navigation";
+
 import {
-  dbInsertUser,
-  dbGetUserByUsername,
-  dbInsertTask,
-  dbGetTasks,
-  dbUpdateTask,
   dbDeleteTask,
+  dbGetTasks,
   dbGetUserByEmail,
   dbGetUserById,
+  dbGetUserByUsername,
+  dbInsertTask,
+  dbInsertUser,
+  dbUpdateTask,
 } from "../db";
-import { createSession, deleteSession } from "@app/utils/session";
-import { verifySession } from "@app/utils/dal";
-import { redirect } from "next/navigation";
-import bcrypt from "bcryptjs";
 
 export type RegisterFormState = {
   success: boolean;
