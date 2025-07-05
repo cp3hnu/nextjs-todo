@@ -7,8 +7,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --ext .js,.ts,.tsx",
-    "lint-fix": "next lint --fix --ext .js,.ts,.tsx",
+    "lint": "next lint --ext .js,.ts,.jsx,.tsx",
+    "lint-fix": "next lint --fix --ext .js,.ts,.jsx,.tsx",
     "format": "prettier --check .",
     "format-fix": "prettier --write .",
     "prepare": "husky"
@@ -16,7 +16,6 @@
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "drizzle-orm": "^0.44.1",
-    "husky": "^9.1.7",
     "jose": "^6.0.11",
     "next": "15.3.2",
     "postgres": "^3.4.7",
@@ -36,20 +35,12 @@
     "eslint-config-next": "15.3.2",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
+    "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.13",
     "tailwindcss": "^4",
     "tsx": "^4.20.3",
     "typescript": "^5"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "npm run format-fix",
-      "npm run lint-fix"
-    ],
-    "*.{json,css,md}": [
-      "npm run format-fix"
-    ]
   }
 }
