@@ -1,8 +1,10 @@
 "use client";
 import "@app/globals.css";
+
 import { useRouter } from "next/navigation";
+import { useActionState, useEffect, useState } from "react";
+
 import { register } from "@/app/action";
-import { useEffect, useState, useActionState } from "react";
 
 export default function RegisterPage() {
   const router = useRouter();

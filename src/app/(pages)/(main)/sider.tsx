@@ -1,7 +1,8 @@
 "use client";
-import { usePathname } from "next/navigation";
-import { logout } from "@/app/action";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { logout } from "@/app/action";
 
 export default function Sider() {
   const pathname = usePathname();

@@ -1,9 +1,10 @@
 "use client";
-import { addTask, updateTask, deleteTask } from "@/app/action";
-import { useState } from "react";
-import { DBTask, DBUser } from "@/app/types";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+
+import { addTask, deleteTask, updateTask } from "@/app/action";
+import { DBTask, DBUser } from "@/app/types";
 
 interface TaskListProps {
   initialTasks?: DBTask[];
