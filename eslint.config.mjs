@@ -24,6 +24,9 @@ const eslintConfig = [
     rules: {
       "simple-import-sort/imports": "error", // 对 import 进行排序
       "simple-import-sort/exports": "error", // 对 export 进行排序（可选）
+      "import/first": "error", // import 语句必须位于文件的顶部
+      "import/newline-after-import": "error", // import 语句后必须换行
+      "import/no-duplicates": "error", // 禁止出现重复的 import
     },
   },
 ];

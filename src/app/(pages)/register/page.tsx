@@ -1,5 +1,6 @@
 "use client";
-import "@app/globals.css";
+
+import "@/app/globals.css";
 
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";

@@ -1,4 +1,4 @@
-import { tasksTable, usersTable } from "@app/db/schema";
+import { tasksTable, usersTable } from "@/app/db/schema";
 
 export type DBUser = typeof usersTable.$inferSelect;
 
