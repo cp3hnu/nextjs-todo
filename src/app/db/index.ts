@@ -1,8 +1,6 @@
 import { and, desc, eq, ilike, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
-
 import { DBTask, DBUser } from "@/app/types";
-
 import { tasksTable, usersTable } from "./schema";
 
 const db = drizzle({

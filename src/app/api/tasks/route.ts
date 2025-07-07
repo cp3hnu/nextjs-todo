@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import { dbGetTasks } from "@/app/db";
 import { verifySession } from "@/app/utils/dal";
 
