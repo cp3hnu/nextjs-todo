@@ -1,8 +1,6 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-
 import { addTask, deleteTask, updateTask } from "@/app/action";
 import { DBTask, DBUser } from "@/app/types";
 

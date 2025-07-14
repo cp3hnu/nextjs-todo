@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-
 import Sider from "./sider";
 
 export default function MainLayout({
