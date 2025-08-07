@@ -1,6 +1,6 @@
 import { and, desc, eq, ilike, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
-import { DBTask, DBUser } from "@/app/types";
+import { DBInsertTask, DBInsertUser, DBTask, DBUser } from "@/app/types";
 import { tasksTable, usersTable } from "./schema";
 
 const db = drizzle({
@@ -12,12 +12,12 @@ export default db;
 
 export async function dbInsertUser(username: string, email: string, password: string): Promise<DBUser> {
   try {
-    const user: typeof usersTable.$inferInsert = {
+    const user: DBInsertUser = {
       username,
       email,
       password,
     };
-    const result = await db.insert(usersTable).values(user);
+    const result = await db.insert(usersTable).values(user).returning();
     return result[0];
   } catch (error) {
     console.error("Error inserting user:", error);
@@ -57,7 +57,7 @@ export async function dbGetUserByEmail(email: string): Promise<DBUser> {
 
 export async function dbInsertTask(userId: number, title: string): Promise<DBTask> {
   try {
-    const task: typeof tasksTable.$inferInsert = {
+    const task: DBInsertTask = {
       userId,
       title,
     };

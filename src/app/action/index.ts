@@ -65,7 +65,7 @@ export async function register(
     }
 
     const hashedPassword = bcrypt.hashSync(password, 10);
-    const user = (await dbInsertUser(username, email, hashedPassword)) as DBUser;
+    const user = await dbInsertUser(username, email, hashedPassword);
     return {
       success: true,
       message: "注册成功，即将跳转到登录页",
